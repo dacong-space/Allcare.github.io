@@ -1,140 +1,592 @@
-const data = [
-    { id: '123456', hours: '20 hr/week', language: 'Chinese', state: 'Active' },
-    { id: '234567', hours: '36 hr/week', language: 'Chinese', state: 'close' },
-    { id: '345678', hours: '13 hr/week', language: 'English', state: 'Pending' },
-    { id: '456789', hours: '40 hr/week', language: 'Chinese', state: 'Active' },
-    { id: '567890', hours: '20 hr/week', language: 'Chinese', state: 'Pending' }
-];
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// 显示加载提示
-function showLoader() {
-    document.getElementById('loader').classList.add('active');
-}
+        <!--=============== FAVICON ===============-->
+        <!-- <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon"> -->
+        <link rel="shortcut icon" href="assets/img/AllCare.jpg" type="image/x-icon">
 
-// 隐藏加载提示
-function hideLoader() {
-    document.getElementById('loader').classList.remove('active');
-}
+        <!--=============== REMIX ICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-function populateTable() {
-    showLoader();
-    const tableBody = document.getElementById('statusTable').getElementsByTagName('tbody')[0];
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="assets/css/styles.css">
 
-    // Sort data based on state (Active > Pending > Close)
-    data.sort((a, b) => {
-        const stateOrder = { 'Active': 1, 'Pending': 2, 'close': 3 };
-        return stateOrder[a.state] - stateOrder[b.state];
-    });
+        <title>AllCare Health Care</title>
+    </head>
+    <body>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="#" class="nav__logo">
+                    <!-- <i class="ri-leaf-line nav__logo-icon"></i> AllCare Health Care -->
+                    <img src="assets/img/AllCare.jpg" alt="Logo" class="nav__logo-icon"> AllCare Health Care
+                </a>
 
-    tableBody.innerHTML = ""; // 清空现有的表格内容
-    data.forEach(item => {
-        const row = document.createElement('tr');
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link active-link">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#about" class="nav__link">About</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#service" class="nav__link">Service</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#faqs" class="nav__link">FAQs</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#contact" class="nav__link">Contact Us</a>
+                        </li>
+                        <!-- 在导航栏中添加 "Open Time" 的按钮 -->
+                        <li class="nav__item">
+                            <a href="opentime.html" class="nav__link">Open Time(test)</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class="ri-moon-line change-theme" id="theme-button"></i>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-menu-line"></i>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!--==================== HOME ====================-->
+            <section class="home" id="home">
+                <div class="home__container container grid">
+                    <img src="assets/img/home.png" alt="" class="home__img">
+
+                    <div class="home__data">
+                        <h1 class="home__title">
+                            Enhance Care with<br>Compassion
+                        </h1>
+                        <p class="home__description">
+                            Transform the quality of care with our dedicated eldercare services. 
+                            At AllCare Health Care, we offer specialized support for Activities 
+                            of Daily Living (ADLs), providing skilled nursing and personalized 
+                            assistance to enrich the lives of your loved ones. Embrace a new 
+                            standard of care with our attentive and compassionate team, ensuring 
+                            a better quality of life for seniors in need.
+                        </p>
+                        <a href="#about" class="button button--flex">
+                            Explore <i class="ri-arrow-right-down-line button__icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="home__social">
+                        <span class="home__social-follow">Follow Us</span>
+
+                        <div class="home__social-links">
+                            <a href="https://www.facebook.com/" target="_blank" class="home__social-link">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+                            <a href="https://www.instagram.com/" target="_blank" class="home__social-link">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+                            <a href="https://twitter.com/" target="_blank" class="home__social-link">
+                                <i class="ri-twitter-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--==================== ABOUT ====================-->
+            <section class="about section container" id="about">
+                <div class="about__container grid">
+                    <img src="assets/img/about.png" alt="" class="about__img">
+
+                    <div class="about__data">
+                        <h2 class="section__title about__title">
+                            Who we really are & <br> why choose us
+                        </h2>
+
+                        <p class="about__description">
+                            At AllCare Health Care, we are dedicated to providing 
+                            exceptional eldercare services with a focus on compassion 
+                            and professionalism. Our clients trust us for our reliable 
+                            and personalized care every time.
+                        </p>
+
+                        <div class="about__details">
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                We prioritize your loved one's well-being with our expert 
+                                support for Activities of Daily Living (ADLs).
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Our skilled nursing team ensures that care is delivered with 
+                                the highest standards and attention to detail.
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                We offer ongoing support and check-ins to ensure that 
+                                all needs are met effectively.
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Your satisfaction is our priority, and we are committed to 
+                                delivering outstanding service with a focus on quality and 
+                                reliability.
+                            </p>
+                        </div>
+
+                        <!-- <a href="#" class="button--link button--flex">
+                            Shop Now <i class="ri-arrow-right-down-line button__icon"></i>
+                        </a> -->
+                    </div>
+                </div>
+            </section>
+
+            <!--==================== STEPS ====================-->
+            <section class="steps section container">
+                <div class="steps__bg">
+                    <h2 class="section__title-center steps__title">
+                        Steps to Start Your <br> Care Journey with Us
+                    </h2>
+
+                    <div class="steps__container grid">
+                        <div class="steps__card">
+                            <div class="steps__card-number">01</div>
+                            <h3 class="steps__card-title">Contact Us</h3>
+                            <p class="steps__card-description">
+                                Reach out to us to discuss your eldercare needs 
+                                and learn more about our personalized services for 
+                                Activities of Daily Living (ADLs).
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">02</div>
+                            <h3 class="steps__card-title">Schedule an Assessment</h3>
+                            <p class="steps__card-description">
+                                Once we understand your requirements, we will schedule 
+                                a detailed assessment to tailor our services to your 
+                                loved one's needs.
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">03</div>
+                            <h3 class="steps__card-title">Begin Care Services</h3>
+                            <p class="steps__card-description">
+                                After the assessment, our dedicated team will start 
+                                providing compassionate care and support, ensuring your 
+                                loved one receives the attention and assistance they deserve.
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <!--==================== ABOUT ====================-->
+            <section class="about section container" id="service">
+                <div class="about__container grid">
+                    <img src="assets/img/about.png" alt="" class="about__img">
+
+                    <div class="about__data">
+                        <h2 class="section__title about__title">
+                            Our Services
+                        </h2>
+
+                        <p class="about__description">
+                            At AllCare Health Care, we are committed to providing 
+                            comprehensive and compassionate support to enhance the 
+                            quality of life for seniors. Our range of services is 
+                            designed to meet the diverse needs of those requiring 
+                            assistance with daily living activities. Here’s a look 
+                            at what we offer:
+                        </p>
+
+                        <div class="about__details">
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Assistance with Activities of Daily Living (ADLs).
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Skilled Nursing Care.
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Companionship and Emotional Support.
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Personalized Care Plans
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Family Support and Communication.
+                            </p>
+                        </div>
+
+                        <!-- <a href="#" class="button--link button--flex">
+                            Shop Now <i class="ri-arrow-right-down-line button__icon"></i>
+                        </a> -->
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <!--==================== Service ====================-->
+            <!-- <section class="product section container" id="service">
+                <h2 class="section__title-center">
+                    Check out our <br> service
+                </h2>
+
+                <p class="product__description">
+                    Here are some selected plants from our showroom, all are in excellent 
+                    shape and has a long life span. Buy and enjoy best quality.
+                </p>
+
+                <div class="product__container grid">
+                    <article class="product__card">
+                        <div class="product__circle"></div>
+
+                        <img src="assets/img/product1.png" alt="" class="product__img">
+
+                        <h3 class="product__title">Cacti Plant</h3>
+                        <span class="product__price">$19.99</span>
+
+                        <button class="button--flex product__button">
+                            <i class="ri-shopping-bag-line"></i>
+                        </button>
+                    </article>
+
+                    <article class="product__card">
+                        <div class="product__circle"></div>
+
+                        <img src="assets/img/product2.png" alt="" class="product__img">
+
+                        <h3 class="product__title">Cactus Plant</h3>
+                        <span class="product__price">$11.99</span>
+
+                        <button class="button--flex product__button">
+                            <i class="ri-shopping-bag-line"></i>
+                        </button>
+                    </article>
+
+                    <article class="product__card">
+                        <div class="product__circle"></div>
+
+                        <img src="assets/img/product3.png" alt="" class="product__img">
+
+                        <h3 class="product__title">Aloe Vera Plant</h3>
+                        <span class="product__price">$7.99</span>
+
+                        <button class="button--flex product__button">
+                            <i class="ri-shopping-bag-line"></i>
+                        </button>
+                    </article>
+
+                    <article class="product__card">
+                        <div class="product__circle"></div>
+
+                        <img src="assets/img/product4.png" alt="" class="product__img">
+
+                        <h3 class="product__title">Succulent Plant</h3>
+                        <span class="product__price">$5.99</span>
+
+                        <button class="button--flex product__button">
+                            <i class="ri-shopping-bag-line"></i>
+                        </button>
+                    </article>
+
+                    <article class="product__card">
+                        <div class="product__circle"></div>
+
+                        <img src="assets/img/product5.png" alt="" class="product__img">
+
+                        <h3 class="product__title">Succulent Plant</h3>
+                        <span class="product__price">$10.99</span>
+
+                        <button class="button--flex product__button">
+                            <i class="ri-shopping-bag-line"></i>
+                        </button>
+                    </article>
+
+                    <article class="product__card">
+                        <div class="product__circle"></div>
+
+                        <img src="assets/img/product6.png" alt="" class="product__img">
+
+                        <h3 class="product__title">Green Plant</h3>
+                        <span class="product__price">$8.99</span>
+
+                        <button class="button--flex product__button">
+                            <i class="ri-shopping-bag-line"></i>
+                        </button>
+                    </article>
+                </div>
+            </section> -->
+
+            <!--==================== QUESTIONS ====================-->
+            <section class="questions section" id="faqs">
+                <h2 class="section__title-center questions__title container">
+                    Some common questions <br> were often asked
+                </h2>
+
+                <div class="questions__container container grid">
+                    <div class="questions__group">
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    What services do you offer?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    We provide specialized support for Activities of Daily 
+                                    Living (ADLs), including assistance with personal care, 
+                                    mobility, and daily tasks.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    How do I get started with your services?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    Contact us to discuss your needs, schedule an assessment, 
+                                    and begin personalized care tailored to your loved one's requirements.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    What qualifications do your caregivers have?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    Our caregivers are trained professionals with experience in eldercare, 
+                                    ensuring high-quality support and compassionate care.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="questions__group">
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    How do you ensure the quality of care?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    We perform regular check-ins and ongoing 
+                                    assessments to maintain the highest standards 
+                                    of care and address any needs or concerns promptly.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    What if my loved one’s condition changes?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    We adapt our care plans as needed to respond to any 
+                                    changes in your loved one’s condition, ensuring continuous, 
+                                    effective support.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    How can I contact you for support or questions?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    You can reach us via phone, email, or through our 
+                                    website’s contact form for any inquiries or support needs.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--==================== CONTACT ====================-->
+            <section class="contact section container" id="contact">                
+                <div class="contact__container grid">
+                    <div class="contact__box">
+                        <h2 class="section__title">
+                            Reach out to us today <br> via any of the given <br> information
+                        </h2>
+
+                        <div class="contact__data">
+                            <div class="contact__information">
+                                <h3 class="contact__subtitle">Call us for instant support</h3>
+                                <span class="contact__description">
+                                    <i class="ri-phone-line contact__icon"></i>
+                                    +666 888 6688
+                                </span>
+                            </div>
+
+                            <div class="contact__information">
+                                <h3 class="contact__subtitle">Write us by mail</h3>
+                                <span class="contact__description">
+                                    <i class="ri-mail-line contact__icon"></i>
+                                    allcare.ray@gmail.com
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form action="" class="contact__form">
+                        <div class="contact__inputs">
+                            <div class="contact__content">
+                                <input type="email" placeholder=" " class="contact__input">
+                                <label for="" class="contact__label">Email</label>
+                            </div>
+
+                            <div class="contact__content">
+                                <input type="text" placeholder=" " class="contact__input">
+                                <label for="" class="contact__label">Subject</label>
+                            </div>
+
+                            <div class="contact__content contact__area">
+                                <textarea name="message" placeholder=" " class="contact__input"></textarea>                              
+                                <label for="" class="contact__label">Message</label>
+                            </div>
+                        </div>
+
+                        <button class="button button--flex">
+                            Send Message
+                            <i class="ri-arrow-right-up-line button__icon"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!--==================== FOOTER ====================-->
+        <footer class="footer section">
+            <div class="footer__container container grid">
+                <div class="footer__content">
+                    <a href="#" class="footer__logo">
+                        <!-- <i class="ri-leaf-line footer__logo-icon"></i> AllCare Health Care -->
+                        <img src="assets/img/AllCare.jpg" alt="Logo" class="footer__logo-icon"> AllCare Health Care
+                    </a>
+
+                    <h3 class="footer__title">
+                        Subscribe to our newsletter <br> to stay update
+                    </h3>
+
+                    <div class="footer__subscribe">
+                        <input type="email" placeholder="Enter your email" class="footer__input">
+
+                        <button class="button button--flex footer__button">
+                            Subscribe
+                            <i class="ri-arrow-right-up-line button__icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Our Address</h3>
+
+                    <ul class="footer__data">
+                        <li class="footer__information">1234 St</li>
+                        <li class="footer__information">Germantown, MD</li>
+                        <li class="footer__information">20874, USA</li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Contact Us</h3>
+
+                    <ul class="footer__data">
+                        <li class="footer__information">+666 888 6688</li>
+                        
+                        <div class="footer__social">
+                            <a href="https://www.facebook.com/" class="footer__social-link">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+                            <a href="https://www.instagram.com/" class="footer__social-link">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+                            <a href="https://twitter.com/" class="footer__social-link">
+                                <i class="ri-twitter-fill"></i>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">
+                        We accept all credit cards
+                    </h3>
+
+                    <div class="footer__cards">
+                        <img src="assets/img/card1.png" alt="" class="footer__card">
+                        <img src="assets/img/card2.png" alt="" class="footer__card">
+                        <img src="assets/img/card3.png" alt="" class="footer__card">
+                        <img src="assets/img/card4.png" alt="" class="footer__card">
+                    </div>
+                </div>
+            </div>
+
+            <p class="footer__copy">&#169;Power by Allcare Health Care,LLC · RuiGao,YilinQiu</p>
+        </footer>
+
+        <!--=============== SCROLL UP ===============-->
+        <a href="#" class="scrollup" id="scroll-up"> 
+            <i class="ri-arrow-up-fill scrollup__icon"></i>
+        </a>
+
+        <!--=============== SCROLL REVEAL ===============-->
+        <script src="assets/js/scrollreveal.min.js"></script>
         
-        const idCell = document.createElement('td');
-        idCell.textContent = item.id;
-        row.appendChild(idCell);
-
-        const hoursCell = document.createElement('td');
-        hoursCell.textContent = item.hours;
-        row.appendChild(hoursCell);
-
-        const languageCell = document.createElement('td');
-        languageCell.textContent = item.language;
-        row.appendChild(languageCell);
-
-        const stateCell = document.createElement('td');
-        stateCell.textContent = item.state;
-
-        // 根据状态赋予不同的颜色类
-        if (item.state.toLowerCase() === 'active') {
-            stateCell.classList.add('state-active');
-        } else if (item.state.toLowerCase() === 'pending') {
-            stateCell.classList.add('state-pending');
-        } else if (item.state.toLowerCase() === 'close') {
-            stateCell.classList.add('state-close');
-        }
-
-        row.appendChild(stateCell);
-        tableBody.appendChild(row);
-    });
-
-    hideLoader();
-}
-
-// 按列排序
-function sortTable(columnIndex) {
-    const table = document.getElementById('statusTable');
-    const rows = Array.from(table.rows).slice(1); // 排除表头
-    const ascending = table.rows[0].cells[columnIndex].classList.toggle('asc');
-    
-    rows.sort((rowA, rowB) => {
-        const cellA = rowA.cells[columnIndex].textContent.trim();
-        const cellB = rowB.cells[columnIndex].textContent.trim();
-
-        if (ascending) {
-            return cellA.localeCompare(cellB);
-        } else {
-            return cellB.localeCompare(cellA);
-        }
-    });
-
-    rows.forEach(row => table.appendChild(row));
-}
-
-// 搜索过滤
-function filterTable() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const stateFilter = document.getElementById('stateFilter').value.toLowerCase();
-    
-    const filteredData = data.filter(item => {
-        const searchMatch = item.id.toLowerCase().includes(searchInput) ||
-                            item.hours.toLowerCase().includes(searchInput) ||
-                            item.language.toLowerCase().includes(searchInput);
-        
-        const stateMatch = stateFilter ? item.state.toLowerCase() === stateFilter : true;
-
-        return searchMatch && stateMatch;
-    });
-
-    populateFilteredTable(filteredData);
-}
-
-// 根据过滤后的数据填充表格
-function populateFilteredTable(filteredData) {
-    const tableBody = document.getElementById('statusTable').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = ""; // 清空表格
-    filteredData.forEach(item => {
-        const row = document.createElement('tr');
-        
-        const idCell = document.createElement('td');
-        idCell.textContent = item.id;
-        row.appendChild(idCell);
-
-        const hoursCell = document.createElement('td');
-        hoursCell.textContent = item.hours;
-        row.appendChild(hoursCell);
-
-        const languageCell = document.createElement('td');
-        languageCell.textContent = item.language;
-        row.appendChild(languageCell);
-
-        const stateCell = document.createElement('td');
-        stateCell.textContent = item.state;
-
-        if (item.state.toLowerCase() === 'active') {
-            stateCell.classList.add('state-active');
-        } else if (item.state.toLowerCase() === 'pending') {
-            stateCell.classList.add('state-pending');
-        } else if (item.state.toLowerCase() === 'close') {
-            stateCell.classList.add('state-close');
-        }
-
-        row.appendChild(stateCell);
-        tableBody.appendChild(row);
-    });
-}
-
-// 初始化页面加载时的数据
-window.onload = function() {
-    populateTable();
-};
+        <!--=============== MAIN JS ===============-->
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>
