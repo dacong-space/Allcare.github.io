@@ -6,6 +6,22 @@
     <title>Open Time Status</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* 设置状态列的颜色 */
+        .state-active {
+            color: green;  /* Active 状态为绿色 */
+            font-weight: bold;
+        }
+
+        .state-pending {
+            color: blue;  /* Pending 状态为蓝色 */
+            font-weight: bold;
+        }
+
+        .state-close {
+            color: red;  /* Close 状态为红色 */
+            font-weight: bold;
+        }
+
         /* 美化表格 */
         table {
             width: 100%;
@@ -30,22 +46,6 @@
 
         tr:hover {
             background-color: #e0f7fa;
-        }
-
-        .valid {
-            color: green;
-            font-weight: bold;
-        }
-
-        .invalid {
-            color: red;
-            font-weight: bold;
-        }
-
-        /* 表格头部样式 */
-        th {
-            font-size: 1.2rem;
-            color: #333;
         }
 
         /* 主页按钮样式 */
@@ -147,7 +147,6 @@
                     <th onclick="sortTable(1)">Hours</th>
                     <th onclick="sortTable(2)">Language</th>
                     <th onclick="sortTable(3)">State</th>
-                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>

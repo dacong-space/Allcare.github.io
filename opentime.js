@@ -44,18 +44,17 @@ function populateTable() {
 
         const stateCell = document.createElement('td');
         stateCell.textContent = item.state;
-        row.appendChild(stateCell);
 
-        const statusCell = document.createElement('td');
+        // 根据状态赋予不同的颜色类
         if (item.state.toLowerCase() === 'active') {
-            statusCell.textContent = 'Valid';
-            statusCell.classList.add('valid');
-        } else {
-            statusCell.textContent = 'Invalid';
-            statusCell.classList.add('invalid');
+            stateCell.classList.add('state-active');
+        } else if (item.state.toLowerCase() === 'pending') {
+            stateCell.classList.add('state-pending');
+        } else if (item.state.toLowerCase() === 'close') {
+            stateCell.classList.add('state-close');
         }
-        row.appendChild(statusCell);
 
+        row.appendChild(stateCell);
         tableBody.appendChild(row);
     });
 
@@ -121,18 +120,16 @@ function populateFilteredTable(filteredData) {
 
         const stateCell = document.createElement('td');
         stateCell.textContent = item.state;
-        row.appendChild(stateCell);
 
-        const statusCell = document.createElement('td');
         if (item.state.toLowerCase() === 'active') {
-            statusCell.textContent = 'Valid';
-            statusCell.classList.add('valid');
-        } else {
-            statusCell.textContent = 'Invalid';
-            statusCell.classList.add('invalid');
+            stateCell.classList.add('state-active');
+        } else if (item.state.toLowerCase() === 'pending') {
+            stateCell.classList.add('state-pending');
+        } else if (item.state.toLowerCase() === 'close') {
+            stateCell.classList.add('state-close');
         }
-        row.appendChild(statusCell);
 
+        row.appendChild(stateCell);
         tableBody.appendChild(row);
     });
 }
