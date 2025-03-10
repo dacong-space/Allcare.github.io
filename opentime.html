@@ -5,23 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Time Status</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 美化表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e0f7fa;
+        }
+
+        .valid {
+            color: green;
+            font-weight: bold;
+        }
+
+        .invalid {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* 表格头部样式 */
+        th {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        /* 主页按钮样式 */
+        .button {
+            background-color: var(--first-color);
+            color: #FFF;
+            padding: 1rem 1.75rem;
+            border-radius: .5rem;
+            font-weight: var(--font-medium);
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: .3s;
+        }
+
+        .button:hover {
+            background-color: var(--first-color-alt);
+        }
+
+        .back-button {
+            background-color: #f44336;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 </head>
 <body>
-    <h1>Open Time Status(For test!!!)</h1>
-    <table id="statusTable" border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Hours</th>
-                <th>Language</th>
-                <th>State</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data will be populated here by JavaScript -->
-        </tbody>
-    </table>
+    <div class="container">
+        <h1 class="section__title-center">Open Time Status</h1>
+        <a href="index.html" class="button back-button">Back to Home</a>
+        
+        <table id="statusTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hours</th>
+                    <th>Language</th>
+                    <th>State</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
 
     <script src="opentime.js"></script>
 </body>
