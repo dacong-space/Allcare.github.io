@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Time Status</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 设置状态列的颜色 */
+        .state-active {
+            color: green;  /* Active 状态为绿色 */
+            font-weight: bold;
+        }
+
+        .state-pending {
+            color: blue;  /* Pending 状态为蓝色 */
+            font-weight: bold;
+        }
+
+        .state-close {
+            color: red;  /* Close 状态为红色 */
+            font-weight: bold;
+        }
+
+        /* 美化表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            cursor: pointer; /* 添加排序指示器 */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e0f7fa;
+        }
+
+        /* 主页按钮样式 */
+        .button {
+            background-color: var(--first-color);
+            color: #FFF;
+            padding: 1rem 1.75rem;
+            border-radius: .5rem;
+            font-weight: var(--font-medium);
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: .3s;
+        }
+
+        .button:hover {
+            background-color: var(--first-color-alt);
+        }
+
+        .back-button {
+            background-color: #f44336;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* 加载提示样式 */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .loader.active {
+            display: block;
+        }
+
+        /* 搜索框样式 */
+        .search-container {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .search-container input {
+            padding: 0.5rem;
+            width: 200px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: .5rem;
+        }
+
+        .filter-container {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .filter-container select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section__title-center">Open Time Status</h1>
+        <a href="index.html" class="button back-button">Back to Home</a>
+
+        <!-- 搜索框 -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search by ID, Hours, Language" onkeyup="filterTable()">
+        </div>
+
+        <!-- 筛选器 -->
+        <div class="filter-container">
+            <label for="stateFilter">Filter by State:</label>
+            <select id="stateFilter" onchange="filterTable()">
+                <option value="">All</option>
+                <option value="Active">Active</option>
+                <option value="Pending">Pending</option>
+                <option value="close">Close</option>
+            </select>
+        </div>
+
+        <!-- 加载提示 -->
+        <div class="loader" id="loader">Loading...</div>
+
+        <table id="statusTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">ID</th>
+                    <th onclick="sortTable(1)">Hours</th>
+                    <th onclick="sortTable(2)">Language</th>
+                    <th onclick="sortTable(3)">State</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="opentime.js"></script>
+</body>
+</html>
