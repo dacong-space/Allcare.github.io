@@ -6,7 +6,18 @@ const data = [
     { id: '567890', hours: '20 hr/week', language: 'Chinese', state: 'Pending' }
 ];
 
+// 显示加载提示
+function showLoader() {
+    document.getElementById('loader').classList.add('active');
+}
+
+// 隐藏加载提示
+function hideLoader() {
+    document.getElementById('loader').classList.remove('active');
+}
+
 function populateTable() {
+    showLoader();
     const tableBody = document.getElementById('statusTable').getElementsByTagName('tbody')[0];
 
     // Sort data based on state (Active > Pending > Close)
@@ -15,7 +26,85 @@ function populateTable() {
         return stateOrder[a.state] - stateOrder[b.state];
     });
 
+    tableBody.innerHTML = ""; // 清空现有的表格内容
     data.forEach(item => {
+        const row = document.createElement('tr');
+        
+        const idCell = document.createElement('td');
+        idCell.textContent = item.id;
+        row.appendChild(idCell);
+
+        const hoursCell = document.createElement('td');
+        hoursCell.textContent = item.hours;
+        row.appendChild(hoursCell);
+
+        const languageCell = document.createElement('td');
+        languageCell.textContent = item.language;
+        row.appendChild(languageCell);
+
+        const stateCell = document.createElement('td');
+        stateCell.textContent = item.state;
+        row.appendChild(stateCell);
+
+        const statusCell = document.createElement('td');
+        if (item.state.toLowerCase() === 'active') {
+            statusCell.textContent = 'Valid';
+            statusCell.classList.add('valid');
+        } else {
+            statusCell.textContent = 'Invalid';
+            statusCell.classList.add('invalid');
+        }
+        row.appendChild(statusCell);
+
+        tableBody.appendChild(row);
+    });
+
+    hideLoader();
+}
+
+// 按列排序
+function sortTable(columnIndex) {
+    const table = document.getElementById('statusTable');
+    const rows = Array.from(table.rows).slice(1); // 排除表头
+    const ascending = table.rows[0].cells[columnIndex].classList.toggle('asc');
+    
+    rows.sort((rowA, rowB) => {
+        const cellA = rowA.cells[columnIndex].textContent.trim();
+        const cellB = rowB.cells[columnIndex].textContent.trim();
+
+        if (ascending) {
+            return cellA.localeCompare(cellB);
+        } else {
+            return cellB.localeCompare(cellA);
+        }
+    });
+
+    rows.forEach(row => table.appendChild(row));
+}
+
+// 搜索过滤
+function filterTable() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const stateFilter = document.getElementById('stateFilter').value.toLowerCase();
+    
+    const filteredData = data.filter(item => {
+        const searchMatch = item.id.toLowerCase().includes(searchInput) ||
+                            item.hours.toLowerCase().includes(searchInput) ||
+                            item.language.toLowerCase().includes(searchInput);
+        
+        const stateMatch = stateFilter ? item.state.toLowerCase() === stateFilter : true;
+
+        return searchMatch && stateMatch;
+    });
+
+    populateFilteredTable(filteredData);
+}
+
+// 根据过滤后的数据填充表格
+function populateFilteredTable(filteredData) {
+    const tableBody = document.getElementById('statusTable').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = ""; // 清空表格
+    filteredData.forEach(item => {
         const row = document.createElement('tr');
         
         const idCell = document.createElement('td');
@@ -48,4 +137,7 @@ function populateTable() {
     });
 }
 
-window.onload = populateTable;
+// 初始化页面加载时的数据
+window.onload = function() {
+    populateTable();
+};
