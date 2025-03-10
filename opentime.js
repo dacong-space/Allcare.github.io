@@ -35,13 +35,12 @@ function populateTable() {
         row.appendChild(stateCell);
 
         const statusCell = document.createElement('td');
-        // Check if the state is active or not
         if (item.state.toLowerCase() === 'active') {
             statusCell.textContent = 'Valid';
-            statusCell.style.color = 'green';
+            statusCell.classList.add('valid');
         } else {
             statusCell.textContent = 'Invalid';
-            statusCell.style.color = 'red';
+            statusCell.classList.add('invalid');
         }
         row.appendChild(statusCell);
 
@@ -49,5 +48,4 @@ function populateTable() {
     });
 }
 
-// Populate the table when the page loads
 window.onload = populateTable;
